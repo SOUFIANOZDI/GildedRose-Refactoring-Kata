@@ -87,6 +87,14 @@ class AgedBrieTest(unittest.TestCase):
         self.assertEqual(-1, item.sell_in)
         self.assertEqual(50, item.quality)
 
+    def test_expired_aged_brie_quality_stops_at_fifty(self):
+        item = Item(ITEM_NAMES["aged_brie"], 0, 49)
+
+        GildedRose([item]).update_quality()
+
+        self.assertEqual(-1, item.sell_in)
+        self.assertEqual(50, item.quality)
+
 
 class SulfurasTest(unittest.TestCase):
     def test_sulfuras(self):
