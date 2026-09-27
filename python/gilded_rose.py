@@ -2,19 +2,18 @@
 class GildedRose:
     def __init__(self, items):
         self.items = items
+        self._handlers = {
+            "Aged Brie": self._update_aged_brie,
+            "Backstage passes to a TAFKAL80ETC concert": self._update_backstage_pass,
+            "Sulfuras, Hand of Ragnaros": self._update_sulfuras,
+        }
 
     def update_quality(self):
         for item in self.items:
+            handler = self._handlers.get(item.name, self._update_standard_item)
             if item.name.startswith("Conjured "):
-                self._update_conjured_item(item)
-            elif item.name == "Aged Brie":
-                self._update_aged_brie(item)
-            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                self._update_backstage_pass(item)
-            elif item.name == "Sulfuras, Hand of Ragnaros":
-                self._update_sulfuras(item)
-            else:
-                self._update_standard_item(item)
+                handler = self._update_conjured_item
+            handler(item)
 
     def _update_standard_item(self, item):
         self._update_degrading_item(item, 1)
