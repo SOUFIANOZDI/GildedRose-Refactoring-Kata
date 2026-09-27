@@ -5,6 +5,7 @@ from gilded_rose import Item, GildedRose
 
 STANDARD_ITEM_NAME = "Standard item"
 AGED_BRIE_NAME = "Aged Brie"
+SULFURAS_NAME = "Sulfuras, Hand of Ragnaros"
 
 
 class GildedRoseTest(unittest.TestCase):
@@ -80,6 +81,22 @@ class GildedRoseTest(unittest.TestCase):
 
         self.assertEqual(-1, item.sell_in)
         self.assertEqual(50, item.quality)
+
+    def test_sulfuras(self):
+        item = Item(SULFURAS_NAME, 1, 80)
+
+        GildedRose([item]).update_quality()
+
+        self.assertEqual(1, item.sell_in)
+        self.assertEqual(80, item.quality)
+
+    def test_expired_sulfuras(self):
+        item = Item(SULFURAS_NAME, -1, 80)
+
+        GildedRose([item]).update_quality()
+
+        self.assertEqual(-1, item.sell_in)
+        self.assertEqual(80, item.quality)
 
 if __name__ == '__main__':
     unittest.main()
