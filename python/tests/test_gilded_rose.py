@@ -33,7 +33,7 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(0, item.quality)
 
     def test_quality_does_not_go_negative(self):
-        item = Item(STANDARD_ITEM_NAME, 0, 0)
+        item = Item(STANDARD_ITEM_NAME, 0, 1)
 
         GildedRose([item]).update_quality()
 
