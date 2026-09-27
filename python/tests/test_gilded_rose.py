@@ -10,7 +10,7 @@ ITEM_NAMES = {
 }
 
 
-class GildedRoseTest(unittest.TestCase):
+class StandardItemTest(unittest.TestCase):
     def test_standard_item(self):
         item = Item(ITEM_NAMES["standard"], 1, 20)
 
@@ -60,6 +60,8 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(0, item.sell_in)
         self.assertEqual(49, item.quality)
 
+
+class AgedBrieTest(unittest.TestCase):
     def test_aged_brie(self):
         item = Item(ITEM_NAMES["aged_brie"], 1, 20)
 
@@ -84,6 +86,8 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(-1, item.sell_in)
         self.assertEqual(50, item.quality)
 
+
+class SulfurasTest(unittest.TestCase):
     def test_sulfuras(self):
         item = Item(ITEM_NAMES["sulfuras"], 1, 80)
 
@@ -99,6 +103,7 @@ class GildedRoseTest(unittest.TestCase):
 
         self.assertEqual(-1, item.sell_in)
         self.assertEqual(80, item.quality)
+
 
 if __name__ == '__main__':
     unittest.main()
