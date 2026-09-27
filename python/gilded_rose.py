@@ -14,15 +14,7 @@ class GildedRose:
             elif item.name == "Aged Brie":
                 self._update_aged_brie(item)
             elif item.name == "Backstage passes to a TAFKAL80ETC concert":
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-                    if item.sell_in < 11 and item.quality < 50:
-                        item.quality = item.quality + 1
-                    if item.sell_in < 6 and item.quality < 50:
-                        item.quality = item.quality + 1
-                item.sell_in = item.sell_in - 1
-                if item.sell_in < 0:
-                    item.quality = item.quality - item.quality
+                self._update_backstage_pass(item)
 
     def _update_degrading_item(self, item):
         degradation = 1
@@ -41,6 +33,17 @@ class GildedRose:
         item.sell_in = item.sell_in - 1
         if item.sell_in < 0 and item.quality < 50:
             item.quality = item.quality + 1
+
+    def _update_backstage_pass(self, item):
+        if item.quality < 50:
+            item.quality = item.quality + 1
+            if item.sell_in < 11 and item.quality < 50:
+                item.quality = item.quality + 1
+            if item.sell_in < 6 and item.quality < 50:
+                item.quality = item.quality + 1
+        item.sell_in = item.sell_in - 1
+        if item.sell_in < 0:
+            item.quality = item.quality - item.quality
 
 
 class Item:
