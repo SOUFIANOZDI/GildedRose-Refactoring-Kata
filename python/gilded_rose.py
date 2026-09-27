@@ -5,24 +5,24 @@ class GildedRose:
 
     def update_quality(self):
         for item in self.items:
-            if item.name not in (
-                "Aged Brie",
-                "Backstage passes to a TAFKAL80ETC concert",
-                "Sulfuras, Hand of Ragnaros",
-            ):
-                self._update_degrading_item(item)
+            if item.name.startswith("Conjured "):
+                self._update_conjured_item(item)
             elif item.name == "Aged Brie":
                 self._update_aged_brie(item)
             elif item.name == "Backstage passes to a TAFKAL80ETC concert":
                 self._update_backstage_pass(item)
             elif item.name == "Sulfuras, Hand of Ragnaros":
                 self._update_sulfuras(item)
+            else:
+                self._update_standard_item(item)
 
-    def _update_degrading_item(self, item):
-        degradation = 1
-        if item.name.startswith("Conjured "):
-            degradation = 2
+    def _update_standard_item(self, item):
+        self._update_degrading_item(item, 1)
 
+    def _update_conjured_item(self, item):
+        self._update_degrading_item(item, 2)
+
+    def _update_degrading_item(self, item, degradation):
         if item.quality > 0:
             item.quality = max(0, item.quality - degradation)
         item.sell_in = item.sell_in - 1
