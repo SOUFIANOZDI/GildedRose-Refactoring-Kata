@@ -3,19 +3,21 @@ import unittest
 
 from gilded_rose import Item, GildedRose
 
+STANDARD_ITEM_NAME = "Standard item"
+
 
 class GildedRoseTest(unittest.TestCase):
     def test_standard_item(self):
-        item = Item("foo", 1, 20)
+        item = Item(STANDARD_ITEM_NAME, 1, 20)
 
         GildedRose([item]).update_quality()
 
-        self.assertEqual("foo", item.name)
+        self.assertEqual(STANDARD_ITEM_NAME, item.name)
         self.assertEqual(0, item.sell_in)
         self.assertEqual(19, item.quality)
 
     def test_expired_item(self):
-        item = Item("foo", 0, 20)
+        item = Item(STANDARD_ITEM_NAME, 0, 20)
 
         GildedRose([item]).update_quality()
 
@@ -23,7 +25,7 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(18, item.quality)
 
     def test_quality_stays_at_zero(self):
-        item = Item("foo", 0, 0)
+        item = Item(STANDARD_ITEM_NAME, 0, 0)
 
         GildedRose([item]).update_quality()
 
@@ -31,7 +33,7 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(0, item.quality)
 
     def test_quality_does_not_go_negative(self):
-        item = Item("foo", 0, 0)
+        item = Item(STANDARD_ITEM_NAME, 0, 0)
 
         GildedRose([item]).update_quality()
 
@@ -39,7 +41,7 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(0, item.quality)
 
     def test_already_expired_item(self):
-        item = Item("foo", -1, 20)
+        item = Item(STANDARD_ITEM_NAME, -1, 20)
 
         GildedRose([item]).update_quality()
 
@@ -47,7 +49,7 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(18, item.quality)
 
     def test_quality_at_fifty_decreases(self):
-        item = Item("foo", 1, 50)
+        item = Item(STANDARD_ITEM_NAME, 1, 50)
 
         GildedRose([item]).update_quality()
 
