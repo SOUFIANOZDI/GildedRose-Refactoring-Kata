@@ -1,5 +1,5 @@
-class GildedRose:
 
+class GildedRose:
     def __init__(self, items):
         self.items = items
 
