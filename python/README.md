@@ -2,6 +2,26 @@
 
 For exercise instructions see [top level README](../README.md)
 
+## Démarche de refactoring
+
+1. Tester le comportement existant pour éviter de casser ce qui fonctionne.
+2. Regrouper les tests par type d'article dans des classes.
+3. Séparer ensuite les tests dans un fichier par type d'article.
+4. Simplifier les `if/else` imbriqués et isoler les règles dans une méthode par type d'article.
+5. Utiliser un dictionnaire pour choisir la bonne méthode de mise à jour.
+
+Les tests sont relancés après chaque changement.
+Voir l'historique des commits (`git log --oneline`) pour suivre ces étapes.
+
+Pour lancer les tests depuis `python`, avec l'environnement virtuel activé : `python -m pytest -q`.
+
+## Améliorations possibles
+
+- Déplacer les méthodes de mise à jour dans un module séparé.
+- Utiliser une classe de mise à jour par type d'article si les règles deviennent plus complexes.
+
+Pour respecter le temps disponible, j'ai gardé une solution simple et testée, sans ajouter de complexité inutile.
+
 Suggestion: create a python virtual environment for this project. See the [documentation](https://docs.python.org/3/library/venv.html)
 
 ## Run the unit tests from the Command-Line
