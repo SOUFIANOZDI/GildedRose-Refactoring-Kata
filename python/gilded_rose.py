@@ -7,9 +7,13 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
+            degradation = 1
+            if item.name.startswith("Conjured "):
+                degradation = 2
+
             if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
                 if item.quality > 0 and item.name != "Sulfuras, Hand of Ragnaros":
-                    item.quality -= 1
+                    item.quality = max(0, item.quality - degradation)
             elif item.quality < 50:
                 item.quality = item.quality + 1
                 if item.name == "Backstage passes to a TAFKAL80ETC concert":
@@ -23,7 +27,7 @@ class GildedRose(object):
                 if item.name != "Aged Brie":
                     if item.name != "Backstage passes to a TAFKAL80ETC concert":
                         if item.quality > 0 and item.name != "Sulfuras, Hand of Ragnaros":
-                            item.quality -= 1
+                            item.quality = max(0, item.quality - degradation)
                     else:
                         item.quality = item.quality - item.quality
                 elif item.quality < 50:
